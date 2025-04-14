@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL 3D Editor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 MySQL Query Playground</h1>
+        <form method="POST">
+            <textarea name="query" placeholder="Type your SQL query here...">{{ request.form.query }}</textarea>
+            <button type="submit">Execute</button>
+        </form>
+
+        {% if error %}
+            <div class="output error">⚠️ {{ error }}</div>
+        {% endif %}
+
+        {% if output %}
+            {% if output is string %}
+                <div class="output">{{ output }}</div>
+            {% else %}
+                <div class="output-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                {% for col in output.headers %}
+                                    <th>{{ col }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in output.rows %}
+                                <tr>
+                                    {% for cell in row %}
+                                        <td>{{ cell }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
