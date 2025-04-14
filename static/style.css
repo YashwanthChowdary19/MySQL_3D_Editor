@@ -277,3 +277,46 @@ tr:hover td {
 .pulse {
   animation: pulse 2s infinite;
 }
+.container::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  z-index: -1;
+  border-radius: 1.5rem;
+  background: conic-gradient(
+    from 0deg,
+    red,
+    orange,
+    yellow,
+    lime,
+    cyan,
+    blue,
+    violet,
+    red
+  );
+  animation: rainbowShift 6s linear infinite;
+  padding: 3px;
+
+  /* Masking so the border is only outer visible (no fill) */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+/* Animate gradient moving along the edge */
+@keyframes rainbowShift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}

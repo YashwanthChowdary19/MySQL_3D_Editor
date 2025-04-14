@@ -14,8 +14,8 @@ def index():
         try:
             conn = mysql.connector.connect(
                 host='localhost',
-                user='my_sql_username',
-                password='my_sql_password',
+                user='root',
+                password='Yash@9346659926',
                 database=current_db if current_db else None
             )
             cursor = conn.cursor()
